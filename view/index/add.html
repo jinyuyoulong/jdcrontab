@@ -1,0 +1,35 @@
+<div>
+    <label for="name">name:<input type="text" id="name" name="name"></label><br>
+    <label for="spec">spec:<input type="text" id="spec" name="spec"></label><br>
+    <label for="command">command:<input type="text" id="command" name="command"></label><br>
+    handler:<select id="handler">
+            <option value="http">http</option>
+            <option value="shall">shall</option>
+        </select>
+    <br>
+    <button>提交</button>
+</div>
+<script>
+    $("button").click(function () {
+        console.log(" button clicked")
+        $.ajax({
+            type: 'post',
+            url: '/add',
+            data:{
+                name:$('#name').val(),
+                spec:$('#spec').val(),
+                command:$('#command').val(),
+                handler: $('#handler').val()
+            },
+            success:function (data) {
+                console.log(data)
+                if (data['code'] == 0){
+                    alert(data['data'])
+                }else {
+                    alert(data['msg'])
+                }
+            }
+        })
+    })
+
+</script>

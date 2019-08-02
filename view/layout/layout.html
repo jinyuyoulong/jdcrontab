@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="/golearn/iris/superstar/web/public/favicon.ico" />
+    <link href="../public/css/layui.css">
+    <link href="../public/js/layui.js">
+    <link href="/static/public/js/layui.js">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <title>{{.Title}} - {{.AppName}}</title>
+</head>
+
+<body style="padding-top: auto;padding-left: 20px;padding-right: 20px">
+
+    <h3 >welcome here</h3>
+
+    <div>
+
+        <!-- Render the current template here -->
+        <!-- index info 等模板填充的是 yield 这个区域 -->
+        {{ yield }}
+
+        <hr />
+        <footer style="text-align: center;">
+            <p>&copy; 2018 - {{.AppOwner}}</p>
+        </footer>
+    </div>
+</body>
+
+</html>

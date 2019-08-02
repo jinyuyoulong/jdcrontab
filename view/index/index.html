@@ -1,0 +1,51 @@
+<div style="padding-top: 20px">
+
+    <div>
+        <span style="color: #1b6d85">活动中的jobs</span>
+    {{range $i, $data := .Datalist}}
+    <ul>
+        {{if .Status}}
+            <li>task id  is {{.TaskId}}</li>
+        {{end}}
+    </ul>
+    {{end}}
+    </div>
+<hr>
+    <span style="color: #1b6d85">所有jobs</span>
+    {{range $i, $data := .Datalist}}
+
+    <div>
+            <pre><span>{{.Name}} &#9; job ID is:{{.Id}}</span>&#9;<span>task_id is {{.TaskId}}</span>&#9;<span>策略是：{{.Spec}}</span></pre>
+    </div>
+    {{end}}
+</div>
+<br><br>
+<br><br>
+
+
+<hr>
+<ul>
+    <li><button type="submit"><a href="/add">添加job</a></button></li>
+    <li><button type="submit"><a href="/startjobs">开启所有任务</a></button></li>
+    <li><button type="submit"><a href="/removealljobs">终止所有job</a></button></li>
+    <li><form action="/dojob" method="get">
+            <label for="starttask">开启一个任务 job ID: </label><input id="starttask" value="1" name="jobId" style="width: 40px"><input type="submit" value="执行">
+        </form>
+    </li>
+    <li><form action="/removejob">
+        <label for="stoptask">终止一个任务 task id为: </label><input style="width: 40px" name="taskID" id="stoptask"><input type="submit" value="执行">
+        </form>
+    </li>
+
+</ul>
+
+
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form'], function(){
+        var layer = layui.layer
+            ,form = layui.form;
+
+        layer.msg('Hello World');
+    });
+</script>
