@@ -5,6 +5,11 @@ package controller
 import (
 	"context"
 	"fmt"
+	"log"
+	"os"
+	"strconv"
+	"time"
+
 	"github.com/jinyuyoulong/jdcrontab/src/bootstrap/service"
 	"github.com/jinyuyoulong/jdcrontab/src/library/crontab"
 	"github.com/jinyuyoulong/jdcrontab/src/library/rpc"
@@ -13,10 +18,6 @@ import (
 	"github.com/kataras/iris/mvc"
 	"github.com/robfig/cron/v3"
 	"google.golang.org/grpc"
-	"log"
-	"os"
-	"strconv"
-	"time"
 )
 
 // IndexController index controller
@@ -30,16 +31,18 @@ func (c *IndexController) Get() mvc.Result {
 
 	datalist := models.JdcronTasks{}.GetAll()
 
+	// c.Ctx.JSON(APIResult(200, datalist, ""))
 	return mvc.View{
 		Name: "index/index.html",
 		Data: iris.Map{
 			"Title":    commonTitle,
-			"Datalist": datalist,
+			"Data":     datalist,
 			"AppOwner": service.AppConfig().App.AppOwner,
 		},
 	}
 }
 
+// GetInfo 详情
 func (c *IndexController) GetInfo() mvc.Result {
 	return mvc.View{
 		Name: "index/info.html",
@@ -51,11 +54,11 @@ func (c *IndexController) GetInfo() mvc.Result {
 	}
 }
 
-// url: /dojob
+// GetDojob url: /dojob
 func (c *IndexController) GetDojob() {
-	jobId, _ := c.Ctx.URLParamInt("jobId")
-	c.Ctx.Writef("jobId = %v\n", jobId)
-	jobModel := models.JdcronTasks{}.GetBy(jobId)
+	jobID, _ := c.Ctx.URLParamInt("jobId")
+	c.Ctx.Writef("jobId = %v\n", jobID)
+	jobModel := models.JdcronTasks{}.GetBy(jobID)
 
 	if jobModel.Id != 0 {
 
@@ -84,6 +87,7 @@ func startJob(task *models.JdcronTasks) {
 
 }
 
+// GetStartjobs 开始任务
 func (c *IndexController) GetStartjobs() {
 	tasks := models.JdcronTasks{}.GetAll()
 	//wg := sync.WaitGroup{}
@@ -103,6 +107,7 @@ func (c *IndexController) GetStartjobs() {
 	c.Ctx.Writef("start jobs")
 }
 
+// GetRemovejob 移除任务
 func (c *IndexController) GetRemovejob() {
 	tid, err := c.Ctx.URLParamInt("taskID")
 	if err != nil {
@@ -118,6 +123,7 @@ func removeJob(taskID int) {
 	models.JdcronTasks{}.UpdateTaskStatus(taskID, 0)
 }
 
+// GetRemovealljobs 移除所有任务
 func (c *IndexController) GetRemovealljobs() {
 	tasks := models.JdcronTasks{}.GetAll()
 	for _, task := range tasks {
@@ -129,15 +135,14 @@ func (c *IndexController) GetRemovealljobs() {
 	c.Ctx.Writef("终止完毕！")
 }
 
-// cron test job
+// GetGetlog cron test job
 func (c *IndexController) GetGetlog() *APIJson {
 	return APIResult(0, "haha", "")
 }
 
-// RPC——
-// /rpc
+// GetRPC 通过rpc执行
 // rpc 通过 http 调用启动，或通过tcp调用响应（暂时没有头绪）
-func (c *IndexController) GetRpc() {
+func (c *IndexController) GetRPC() {
 	command := c.Ctx.URLParam("command")
 	if command == "" {
 		command = "localhost:8000"
@@ -182,6 +187,7 @@ func connectRPC(ictx iris.Context, command string) {
 
 }
 
+// GetAdd 添加 job页面
 func (c *IndexController) GetAdd() mvc.Result {
 	return mvc.View{
 		Name: "index/add.html",
@@ -190,6 +196,8 @@ func (c *IndexController) GetAdd() mvc.Result {
 		},
 	}
 }
+
+// PostAdd 添加 job action
 func (c *IndexController) PostAdd() {
 	//for i,value := range c.Ctx.PostValues() {
 	//
