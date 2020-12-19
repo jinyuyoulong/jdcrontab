@@ -1,14 +1,25 @@
-<div>
-    <label for="name">name:<input type="text" id="name" name="name"></label><br>
-    <label for="spec">spec:<input type="text" id="spec" name="spec"></label><br>
-    <label for="command">command:<input type="text" id="command" name="command"></label><br>
-    handler:<select id="handler">
-            <option value="http">http</option>
-            <option value="shall">shall</option>
-        </select>
-    <br>
-    <button>提交</button>
+<div class="container">
+    <div>
+        <h5>示例 命令行</h5>
+        name: cmd_name<br>
+        spec: cmd_spec<br>
+        command: echo date<br>
+        handler: shall<br>
+    </div>
+    <hr>
+    <div>
+        <label for="name">name:<input type="text" id="name" name="name"></label><br>
+        <label for="spec">spec:<input type="text" id="spec" name="spec"></label><br>
+        <label for="command">command:<input type="text" id="command" name="command"></label><br>
+        handler:<select id="handler">
+                <option value="http">http</option>
+                <option value="shall">shall</option>
+            </select>
+        <br>
+        <button>提交</button>
+    </div>
 </div>
+
 <script>
     $("button").click(function () {
         console.log(" button clicked")

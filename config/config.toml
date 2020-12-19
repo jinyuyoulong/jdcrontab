@@ -12,12 +12,12 @@
 [mysql]
   dbname = "@tcp(127.0.0.1:3306)/test?charset=utf8"
   username = "root"
-  password = "333"
+  password = "123"
 
 [website]
   static_uri = "/static"
   site_title = "后台管理"
-  copy_right = "<small>&copy;2019</small>"
+  copy_right = "<small>&copy;2020</small>"
 
 [redis]
   network = "tcp"
