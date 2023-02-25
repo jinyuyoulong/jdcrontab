@@ -18,7 +18,6 @@ require (
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4 // indirect
 	github.com/fsnotify/fsnotify v1.4.7 // indirect
 	github.com/go-sql-driver/mysql v1.4.1
-	github.com/gographics/imagick v3.2.0+incompatible
 	github.com/golang/protobuf v1.3.2
 	github.com/gomodule/redigo v2.0.0+incompatible // indirect
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible // indirect
@@ -43,12 +42,9 @@ require (
 	github.com/xormplus/xorm v0.0.0-20190716095437-b334b6939835
 	go.uber.org/dig v1.7.0
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
-	golang.org/x/net v0.0.0-20190724013045-ca1201d0de80
-	golang.org/x/sys v0.0.0-20190726091711-fc99dfbffb4e // indirect
-	golang.org/x/tools v0.0.0-20190728063539-fc6e2057e7f6 // indirect
+	golang.org/x/net v0.0.0-20190724013045-ca1201d0de80 // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
 	google.golang.org/grpc v1.22.1
 	gopkg.in/flosch/pongo2.v3 v3.0.0-20141028000813-5e81b817a0c4 // indirect
-	gopkg.in/gographics/imagick.v3 v3.2.0 // indirect
-	xorm.io/core v0.7.0 // indirect
 )
